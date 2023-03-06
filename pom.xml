@@ -27,6 +27,23 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.confluent/kafka-protobuf-serializer -->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-protobuf-serializer</artifactId>
+            <version>7.3.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -34,13 +51,20 @@
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
+                <configuration>
+                    <buildArgs>
+                        <buildArg>-H:ReflectionConfigurationResources=./src/main/resources/META-INF/native-image/io.confluent/kafka-protobuf-serializer/schema-registry-client-reflection.json</buildArg>
+                    </buildArgs>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
+
+
                 <configuration>
                     <image>
-                        <cleanCache>true</cleanCache>
                         <name>localhost:8843/test/${project.artifactId}</name>
                         <builder>localhost:8843/paketobuildpacks/builder-jammy-tiny:0.0.102</builder>
                         <runImage>localhost:8843/paketobuildpacks/run-jammy-tiny:0.1.48</runImage>

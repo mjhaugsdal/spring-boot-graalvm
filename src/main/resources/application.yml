@@ -1,0 +1,15 @@
+spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      group-id: baeldung
+      #value-deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    bootstrap-servers: host.docker.internal:9092
+    properties:
+      schema:
+        registry:
+          url: http://localhost:2181
+
+test:
+  topic: embedded-test-topic

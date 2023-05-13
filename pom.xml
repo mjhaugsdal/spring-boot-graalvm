@@ -52,40 +52,37 @@
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
                 <configuration>
-                    <buildArgs>
-                        <buildArg>-H:ReflectionConfigurationResources=./src/main/resources/META-INF/native-image/io.confluent/kafka-protobuf-serializer/schema-registry-client-reflection.json</buildArg>
-                    </buildArgs>
+                    <agent>
+                        <enabled>true</enabled>
+                    </agent>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-
-
-
                 <configuration>
                     <image>
                         <name>localhost:8843/test/${project.artifactId}</name>
-                        <builder>localhost:8843/paketobuildpacks/builder-jammy-tiny:0.0.102</builder>
-                        <runImage>localhost:8843/paketobuildpacks/run-jammy-tiny:0.1.48</runImage>
+<!--                        <builder>localhost:8843/paketobuildpacks/builder-jammy-tiny:0.0.102</builder>-->
+<!--                        <runImage>localhost:8843/paketobuildpacks/run-jammy-tiny:0.1.48</runImage>-->
                         <env>
                             <BP_JVM_VERSION>17</BP_JVM_VERSION>
                         </env>
-                        <bindings>
-                            <binding>${project.basedir}/platform/bindings/jdk:/platform/bindings/jdk</binding>
-                            <binding>${project.basedir}/platform/bindings/syft:/platform/bindings/syft</binding>
-                        </bindings>
+<!--                        <bindings>-->
+<!--                            <binding>${project.basedir}/platform/bindings/jdk:/platform/bindings/jdk</binding>-->
+<!--                            <binding>${project.basedir}/platform/bindings/syft:/platform/bindings/syft</binding>-->
+<!--                        </bindings>-->
                     </image>
-                    <docker>
-                        <publishRegistry>
-                            <username>admin</username>
-                            <password>admin</password>
-                        </publishRegistry>
-                        <builderRegistry>
-                            <username>admin</username>
-                            <password>admin</password>
-                        </builderRegistry>
-                    </docker>
+<!--                    <docker>-->
+<!--                        <publishRegistry>-->
+<!--                            <username>admin</username>-->
+<!--                            <password>admin</password>-->
+<!--                        </publishRegistry>-->
+<!--                        <builderRegistry>-->
+<!--                            <username>admin</username>-->
+<!--                            <password>admin</password>-->
+<!--                        </builderRegistry>-->
+<!--                    </docker>-->
                 </configuration>
             </plugin>
         </plugins>
